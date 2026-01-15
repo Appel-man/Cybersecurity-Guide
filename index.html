@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Guide | Phylixius</title>
+    <meta name="description" content="A comprehensive guide on how to operate securely and stay safe online.">
+    <style>
+        /* --- CSS Variables & Reset --- */
+        :root {
+            --bg-color: #0f1115;
+            --card-bg: #161b22;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-primary: #58a6ff; /* Blue */
+            --accent-easy: #2ea043;    /* Green */
+            --accent-medium: #d29922;  /* Orange/Yellow */
+            --accent-hard: #f85149;    /* Red */
+            --border-color: #30363d;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            --max-width: 900px;
+            --spacing-unit: 1.5rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3, h4 {
+            color: #ffffff;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.8rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 3rem; }
+        h3 { font-size: 1.4rem; color: var(--text-main); margin-top: 1.5rem; }
+        
+        p { margin-bottom: 1.5rem; }
+        
+        a { color: var(--accent-primary); text-decoration: none; transition: color 0.2s; }
+        a:hover { text-decoration: underline; color: #79b8ff; }
+
+        strong { color: #ffffff; font-weight: 600; }
+
+        code {
+            background-color: rgba(110, 118, 129, 0.2);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+            font-size: 0.9em;
+            color: var(--accent-primary);
+        }
+
+        ul, ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+
+        /* --- Layout --- */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* --- Header / Hero --- */
+        header {
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        blockquote.quote-hero {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1rem 1.5rem;
+            margin: 2rem auto;
+            background: rgba(255,255,255,0.03);
+            border-radius: 0 6px 6px 0;
+            max-width: 800px;
+        }
+
+        .author-intro {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 3rem;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(15, 17, 21, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        nav li a {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        nav li a:hover {
+            background: rgba(255,255,255,0.1);
+            text-decoration: none;
+        }
+
+        /* --- Section Styling (Difficulty Levels) --- */
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            color: #000;
+        }
+
+        .easy-section .difficulty-badge { background-color: var(--accent-easy); }
+        .medium-section .difficulty-badge { background-color: var(--accent-medium); }
+        .hard-section .difficulty-badge { background-color: var(--accent-hard); }
+
+        .easy-section h2 { border-color: var(--accent-easy); }
+        .medium-section h2 { border-color: var(--accent-medium); }
+        .hard-section h2 { border-color: var(--accent-hard); }
+
+        /* --- Content Cards --- */
+        article.topic {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        article.topic:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        article.topic h3 {
+            margin-top: 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        /* --- Lists & Details --- */
+        .sub-list {
+            list-style-type: disc;
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+        }
+        .sub-list li::marker { color: var(--text-muted); }
+
+        .warning-box {
+            border-left: 4px solid var(--accent-hard);
+            padding: 1rem;
+            background: rgba(248, 81, 73, 0.1);
+            border-radius: 0 4px 4px 0;
+            margin: 1.5rem 0;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive Tweaks --- */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            header { padding: 2rem 0; }
+            .container { padding: 0 1rem; }
+            blockquote.quote-hero { font-size: 1rem; }
+            nav ul { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#beginner" style="color: var(--accent-easy)">Beginner</a></li>
+                <li><a href="#amateur" style="color: var(--accent-medium)">Amateur</a></li>
+                <li><a href="#expert" style="color: var(--accent-hard)">Expert</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <h1>Cybersecurity Guide</h1>
+            <p style="text-align: center; color: var(--accent-primary);">By Phylixius</p>
+            
+            <blockquote class="quote-hero">
+                "The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards. And even then I have my doubts."
+                <br><span style="font-size: 0.8rem; margin-top: 0.5rem; display: block; opacity: 0.7;">— Gene Spafford</span>
+            </blockquote>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Introduction -->
+        <section id="intro">
+            <div class="author-intro">
+                <h2>Introduction</h2>
+                <p>This is a comprehensive guide made by <strong>Phylixius</strong> on how you should operate securely and stay safe online. This will not include everything, as new threats come out every day. I will try to explain things as easily as possible and provide a technical explanation. This document will be divided into 3 main categories.</p>
+                <p>While it does contain a technical explanation, it is surely not the whole thing. There’s a lot more behind the scenes. I want to balance technical with simplification. I think you should know a bit of the background, as you can’t do something that you don’t know much about.</p>
+                
+                <h3>Who am I?</h3>
+                <p>I have been a Computer and Internet enthusiast since the day I was born. I have a lot of passion for all sorts of tech, and I am eager to learn, which has led me to where I am now. If I give one sentence as a tip, it would be: <em>research, tinkering, patience, and repeat</em>.</p>
+                <p>If you are genuinely interested in my experience, I have written a brief profile of myself on my portfolio. You can see it <a href="http://appel-man.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+                
+                <p style="margin-top: 2rem;">Anyways, enough about me, let’s explain some cybersecurity topics!</p>
+            </div>
+        </section>
+
+        <!-- Easy/Beginner -->
+        <section id="beginner" class="easy-section">
+            <span class="difficulty-badge">Easy / Beginner</span>
+            <h2>Beginner Topics</h2>
+            <p>In this section, I will cover basic cybersecurity topics that everyone has heard about but doesn’t really understand.</p>
+
+            <article class="topic" id="ip-address">
+                <h3><a href="https://en.wikipedia.org/wiki/IP_address" target="_blank" rel="noopener noreferrer">IP Address</a> (Internet Protocol)</h3>
+                <p>An IP address is your address on the network (Layer 3 of the OSI and TCP/IP model). It is needed to communicate over the network layer (beyond the router). It is the same as if your friend wants to mail you; they need to know your physical address to send it to.</p>
+                <p>You have two types of IP addresses (thanks to <a href="https://en.wikipedia.org/wiki/Network_address_translation" target="_blank" rel="noopener noreferrer">network address translation</a>/NAT):</p>
+                <ul class="sub-list">
+                    <li>
+                        <strong>Private IP address:</strong> This is needed to communicate on your <a href="https://en.wikipedia.org/wiki/Local_area_network" target="_blank" rel="noopener noreferrer">local area network</a> (LAN), like the devices in a house or a company. A private IP address of a device in your home network can be reused in another home network. A private IP address is only relevant if you are in that local network; thus, it is not harmful for others to know.
+                    </li>
+                    <li>
+                        <strong>Public IP address:</strong> This is necessary for communicating over the internet when you leave your LAN (traffic exiting the router/modem). Every device on the internet that you contact can see your public IP address (websites, apps, games, …).
+                        <br><br>
+                        You can estimate the range of where a public IP address originates from (City, ISP name, …), not exactly (Physical coordinates). Most public IP addresses are dynamic, thus they change over time. If you have a static IP address, then it stays so and doesn’t change.
+                        <br><br>
+                        It is impossible to know your exact physical location by the IP address itself, unless you hack into the ISP’s systems. However, ISPs can have data breaches as well. It is also possible by matching your IP address to other stolen data in other data breaches (emails, old accounts, social media) that contain your IP address and additional information. It is by hand of combinations of information (username, old posts, photos with metadata) that you can puzzle to find your location, this is called cross-referencing.
+                        <br><br>
+                        If they really want to, they could also DDOS you, or scan for open ports (ports you forwarded, for example, for a website you host or a Minecraft server), and attack the service itself. That’s why it’s important to keep your computer and the stuff that’s running on it up to date. You shouldn’t port forward in the first place if you don’t have a security background.
+                    </li>
+                </ul>
+            </article>
+
+            <article class="topic" id="https">
+                <h3><a href="https://en.wikipedia.org/wiki/HTTPS" target="_blank" rel="noopener noreferrer">HTTPS</a> (HyperText Transfer Protocol Secure)</h3>
+                <p>HTTPS is the same as HTTP (a protocol to communicate with a web server), but with an additional security layer on top.</p>
+                <p>The problem here with HTTP is:</p>
+                <ul class="sub-list">
+                    <li>It’s not encrypted, thus clear/plain text. If I could sit between the connection of you and the web server, then I could see all the web traffic, thus your username, password, and even your cookie.</li>
+                    <li>It can be altered, so an attacker could modify your traffic and thus inject scripts, etc.</li>
+                    <li>Fake website: When you enter the exact correct domain name/website, it is possible to go to a fake one without anyone/anything knowing.</li>
+                </ul>
+                <p>You don’t have all these problems with HTTPS. But this doesn’t mean that HTTPS is 100% secure; there are still other attacks that HTTPS doesn’t cover.</p>
+            </article>
+
+            <article class="topic" id="vpn">
+                <h3><a href="https://en.wikipedia.org/wiki/Virtual_private_network" target="_blank" rel="noopener noreferrer">VPN</a> (Virtual Private Network)</h3>
+                <p>A VPN is an overlay network; it creates a logical/virtual network topology. Simply said, it is a tunnel between you and the VPN server. All your network traffic that goes over the internet first goes through the tunnel and then to its destination. In most cases, local traffic to your LAN doesn’t pass the tunnel. Most VPN tunnels are encrypted. For the things you visit (games, websites, …), they will see your VPN server’s IP address.</p>
+                <p><strong>Is it 100% private?</strong> You don’t know; most VPN services claim to have a no-log policy, but that’s up to you to believe. A no-log policy means that they don’t log your activities.</p>
+                
+                <p>Things that can still leak the VPN:</p>
+                <ul class="sub-list">
+                    <li>If WebRTC is enabled and the VPN isn’t configured correctly.</li>
+                    <li>Some DNS scenarios.</li>
+                    <li>IPv6 traffic (when the VPN only handles IPv4 traffic).</li>
+                    <li>Split tunnelling.</li>
+                    <li>Sometimes hardcoded IPs.</li>
+                    <li>UDP traffic (When the VPN only tunnels TCP traffic).</li>
+                    <li>Sometimes torrent clients.</li>
+                    <li>VPN reconnect/short drops.</li>
+                    <li>ICMP (if the VPN doesn’t support this).</li>
+                    <li>Malware/spyware.</li>
+                </ul>
+                
+                <p>It is also a common misunderstanding that all traffic before your VPN was turned on will be forgotten. For example, when you sign up for an account without a VPN, that information will be logged and remembered, no matter how many times you use your VPN afterwards.</p>
+                
+                <p>When you should use it:</p>
+                <ul class="sub-list">
+                    <li>Public network</li>
+                    <li>P2P like torrenting</li>
+                    <li>When privacy is necessary</li>
+                </ul>
+                <p>For a VPN, I can only advise <a href="https://protonvpn.com/?srsltid=AfmBOoqguFtL27aHmA7mkn1_Wa87e2GAOiTpFxYYwQTYwa7gbVC-66mj" target="_blank" rel="noopener noreferrer">ProtonVPN</a> and <a href="https://mullvad.net/en" target="_blank" rel="noopener noreferrer">Mullvad</a>.</p>
+            </article>
+
+            <article class="topic" id="proxy">
+                <h3>Proxy</h3>
+                <p>A proxy is similar to a VPN, but without all the fancy stuff. It routes all traffic to a proxy server, thus changing your IP to the proxy server’s IP.</p>
+                <p>There are several types of proxies. But the one I advise you to use when visiting links you don’t trust is a webproxy.</p>
+                <p>A good webproxy that I use a lot is <a href="https://proxyium.com/" target="_blank" rel="noopener noreferrer">Proxyium</a>. You just paste the link in there, and it will all run on the proxy server. Keep in mind that they can still get all user-end/front-end/browser-side information. Only the IP changes.</p>
+            </article>
+
+            <article class="topic" id="opsec">
+                <h3>OPSEC (Operational Security)</h3>
+                <p>Simply said, operational security is keeping sensitive information safe so attackers can’t exploit it. In practice, this means being careful with what you share, store, or do online and in your systems.</p>
+                
+                <h4>Examples of good opsec:</h4>
+                <ul class="sub-list">
+                    <li><strong>Don’t share any PII (Personal Identifiable Information):</strong> Birthday/age, location, name parts, school/hobby, gender, phone/email (use <a href="https://temp-mail.org/en/" target="_blank" rel="noopener noreferrer">Temp-mail</a>, <a href="https://simplelogin.io/" target="_blank" rel="noopener noreferrer">SimpleLogin</a>, or <a href="https://addy.io/" target="_blank" rel="noopener noreferrer">AnonAddy</a>), health conditions, browsing history, preferences.</li>
+                    <li><strong>Indirect Identification:</strong> Texting style, grammar habits, emoji usage, time of day active, sleep schedule, posting frequency, topics you talk about, niche interests, usernames, who you reply to, conflict resolution style, OS used, microphone background noise, weather/local events.</li>
+                    <li><strong>Metadata:</strong> Image metadata (EXIF), file creation, file author, screenshot resolutions, file names.</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <strong>Hear me out:</strong> it’s not because you leaked one of them that your identity instantly gets leaked, it is by the combination of them. So next time you make an alt account, know that everyone knows what you do. Another thing is that people like talking about themselves; don’t do that, all of it can be used against you.
+                </div>
+
+                <p>A privacy-focused browser that I highly recommend is <a href="https://duckduckgo.com/" target="_blank" rel="noopener noreferrer">DuckDuckGo</a>, and for a privacy and security-focused communication app, I recommend <a href="https://getsession.org/" target="_blank" rel="noopener noreferrer">Session</a>.</p>
+            </article>
+
+            <article class="topic" id="passkeys">
+                <h3>Passkeys</h3>
+                <p>A passkey is a lot more secure than traditional passwords; it is based on cryptographic key pairs.</p>
+                <p>Here’s an overview:</p>
+                <ul class="sub-list">
+                    <li>Phishing is practically impossible because it is domain-bound.</li>
+                    <li>No shared secrets that can be stolen by data breaches.</li>
+                    <li>No reuse, unlike passwords.</li>
+                </ul>
+                <p>A passkey is stored on your device, which also means that if it is stolen and unlocked, they have access to it. Thus, malware is also a thing. Attackers can also social engineer you if you are vulnerable to it. The way they are synchronised (iCloud, Google Password Manager) can be a target as well, thus not syncing them is a security feature.</p>
+                <p>A passkey combines something you have (your device) and something you are/know (biometric/PIN). It also only works with HTTPS.</p>
+                <p>Should you completely replace MFA and passwords with passkeys? I 100% do, but under one condition: If you don’t have access to the device you have the passkey on, your account will be lost; thus, store them on multiple devices, and you are good to go. Or you can just buy a YubiKey.</p>
+            </article>
+
+            <article class="topic" id="soceng">
+                <h3><a href="https://en.wikipedia.org/wiki/Social_engineering_(security)" target="_blank" rel="noopener noreferrer">SOCENG</a> (Social Engineering)</h3>
+                <p>Social Engineering, how I would say it, is hacking humans. The most common attack method hackers use.</p>
+                <p>Social Engineering has several forms: Phishing, Pretexting, Baiting, Impersonation, Tailgating / Piggybacking, Scareware, Reverse Social Engineering, BitB (Browser in the Browser), and more.</p>
+                <p>It might sound harmless and dumb to fall for, but it is actually the most dangerous and largest vulnerability a company or group has. Humans are social creatures; keep that in mind.</p>
+                
+                <h4>Here are some examples in Discord:</h4>
+                <ul class="sub-list">
+                    <li>Someone asks you to copy and paste a message, which can get you banned or your whole server raided.</li>
+                    <li>You join a new gaming server and verify your account with a verified bot, and boom, your account has been stolen (QR Code).</li>
+                    <li>You see an image with a mouse, and an arrow pointing to the middle mouse wheel, saying middle-click this image. You do it, and boom, your IP, ISP, Browser name, OS name got leaked (grabbing website).</li>
+                    <li>Your face got leaked by someone, he claims, but the image with your face keeps loading. You open it up in your browser and boom, your data got leaked (grabbing website).</li>
+                    <li>Someone asks you to chat on another platform. You call each other on Zoom/telegram/whatever, and boom, your IP got leaked (P2P).</li>
+                    <li><strong>Password Reset Phishing:</strong> A fake Discord bot messages you about a password reset, sends you to a fake site (AitM), you log in and fill in MFA, and they steal your cookie.</li>
+                    <li>A GFX artist asks you to screenshare or sends you a video on how to get your avatar. It asks you to go to developer tools (F12) and download a file (HAR file), and boom, she got your cookie.</li>
+                    <li>Someone threatens to ban you and asks for a PC check. They ask you to open developer tools and scroll through your network tab, and boom, he got your cookie.</li>
+                </ul>
+
+                <div class="warning-box">
+                    <strong>You should never do the following:</strong>
+                    <ul>
+                        <li>Open the developer console/pressing F12 when someone asks you to.</li>
+                        <li>Open link shorteners.</li>
+                        <li>Download any file from the internet (especially if it’s a ZIP file with a password).</li>
+                    </ul>
+                </div>
+
+                <p><strong>And always should do the following:</strong></p>
+                <ul class="sub-list">
+                    <li>Hover over links or check the open link warnings to see the true link.</li>
+                    <li>Put the link in <a href="https://www.virustotal.com/gui/home/url" target="_blank" rel="noopener noreferrer">VirusTotal</a> to check if it is malicious.</li>
+                    <li>Put the link in a webproxy as I said earlier.</li>
+                </ul>
+                
+                <p>If you want to test your phishing detection skills, take <a href="https://phishingquiz.withgoogle.com/" target="_blank" rel="noopener noreferrer">Google’s Phishing Quiz</a>.</p>
+            </article>
+
+            <article class="topic" id="cookies">
+                <h3>Cookie/Session Token</h3>
+                <p>A cookie/session token’s only purpose is for a better user experience. When you log into Instagram, for example. You want to stay logged in. You don’t need to give your credentials every time you revisit Instagram. For this to work, the website needs to remember you. Every time you log in, the server will store your cookie in your browser.</p>
+                <p><strong>In short:</strong></p>
+                <ul class="sub-list">
+                    <li>A cookie is a value stored in your browser that will be remembered when you reopen your browser or restart your PC. It is to remember website preferences and anything that the website needs to remember.</li>
+                    <li>A session token, on the other hand, is generated text that is stored as/in a cookie so you don’t have to login everytime you visit the website.</li>
+                </ul>
+                <p>If you take someone else’s token and put it in the browser, the website will think it is the other person revisiting the website.</p>
+                <p>If anyone stole your cookie, you can reset it by changing your password.</p>
+            </article>
+
+            <article class="topic" id="dos">
+                <h3><a href="https://en.wikipedia.org/wiki/Denial-of-service_attack" target="_blank" rel="noopener noreferrer">DoS Attack</a> (Denial of Service)</h3>
+                <p>This is a cyber attack where an attacker wants to take down a service; it could be caused by anything. The most common method is by a DDoS (Distributed DoS), this is where an attacker uses a large number of (mostly infected) devices that flood your bandwidth/resources. If you want to see this in action, visit <a href="https://horizon.netscout.com/" target="_blank" rel="noopener noreferrer">this</a> webpage.</p>
+                <p>Other methods are, for example, an exploit that crashes a web server so it’s not reachable anymore. It is just the practice of making a service unreachable.</p>
+            </article>
+        </section>
+
+        <!-- Medium/Amateur -->
+        <section id="amateur" class="medium-section">
+            <span class="difficulty-badge">Medium / Amateur</span>
+            <h2>Intermediate Topics</h2>
+            <p>This section is a bit more in-depth; it is possible that you do not understand certain logic.</p>
+
+            <article class="topic" id="dns">
+                <h3><a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener noreferrer">DNS</a> (Domain Name System/Server)</h3>
+                <p>Simply said, DNS’s main purpose is to translate domain names into IP addresses. We, as humans, can remember text better than numbers. If you visit a website, like YouTube, then you type youtube.com, and not an IP address. This is thanks to the DNS server. It is a decentralised network of databases that contains all domain names with their IP addresses.</p>
+                <p>If the attacker is in your network (Cafe, restaurant, free Wi-Fi), then he could give you a fake DNS server through various methods. So, it could show you another website under the same domain name (only works with HTTP, not HTTPS). This is called <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack" target="_blank" rel="noopener noreferrer">MITM</a> (Man In The Middle).</p>
+                <p>DNS traffic is also not encrypted by default. Because of this, everything between your device and the DNS server could see which domains you requested. You can enable encryption for DNS without a VPN, but it isn’t easy to enable. If you really want to, then you can use <a href="https://en.wikipedia.org/wiki/DNS_over_HTTPS" target="_blank" rel="noopener noreferrer">DoH</a> (DNS over HTTPS).</p>
+            </article>
+
+            <article class="topic" id="xss">
+                <h3><a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="noopener noreferrer">XSS</a> (Cross-Site-Scripting)</h3>
+                <p><strong>Scenario:</strong> You have a Discord concern or question, but aren’t familiar with the Discord blog, so you just ask in a server. Someone replied and said we should go in DMs. He gives you the link to the official Discord blog post (an actual link, no phishing). You visit the authentic website, and boom, your cookie has been stolen.</p>
+                <p><strong>How?</strong> You checked the domain, used a VPN, didn’t give any input. This is because an attacker used XSS. Simply said, XSS is injecting your own script into the browser. Almost every website has JavaScript to make it function. But if the website is not secure enough, an attacker could inject their own script.</p>
+                <p>Okay, so how did it happen in the scenario: An attacker commented on the official blog post with a normal message like “Thank you, I almost got my password reset” along with the XSS script. Now, every time you visit that page, the page will load all its contents, including the comments and thus also the script that was injected, and run it. I have to say that this is very rare, as this constantly gets patched.</p>
+            </article>
+
+            <article class="topic" id="aitm">
+                <h3>AitM (Adversary in the Middle)</h3>
+                <p>AitM is a man-in-the-middle attack combined with phishing.</p>
+                <p>AitM works with two connections instead of one. One between you and the attacker’s server, and the attacker’s server between the legit website you wanted to visit.</p>
+                <code>[You] &larr; conn1 &rarr; [fakegoogle.com] &larr; conn2 &rarr; [google.com]</code>
+                <br><br>
+                <p>So let’s say you got baited on a fake Google website. The attacker’s server asks real Google to log in, gets that page, and forwards that to you. When you give your credentials, it will first go to the attacker’s server, and he will forward that to Google. Maybe you enabled MFA, so Google replies with the MFA page, and the attacker sends it to you. Then you fill in your code, and that will also be sent to the attacker's machine and so to Google. Then Google will reply with your dashboard/home page, and thus also containing your cookie, which the attacker will grab.</p>
+                <p><strong>Solution to this:</strong> Passkey.</p>
+            </article>
+
+            <article class="topic" id="zta">
+                <h3><a href="https://en.wikipedia.org/wiki/Zero_trust_architecture" target="_blank" rel="noopener noreferrer">ZTA</a> (Zero-Trust Architecture)</h3>
+                <p>The Zero-Trust Architecture is a cybersecurity model based on one core idea: <em>Never trust anything by default — always verify.</em></p>
+                <p>That applies to everything: users, devices, applications, and network traffic, whether they’re inside or outside the network/group.</p>
+                <p><strong>In general:</strong></p>
+                <ul class="sub-list">
+                    <li>No implicit trust, even inside the network/group.</li>
+                    <li>Every request is verified every time.</li>
+                    <li>Access is limited to exactly what is needed (Users and services get only the permissions they need).</li>
+                    <li>Breaches are assumed to happen (Design systems as if attackers are already inside).</li>
+                </ul>
+            </article>
+
+            <article class="topic" id="malware">
+                <h3>Malware (Malicious Software)</h3>
+                <p>There are various forms of malware; here are the most common ones categorized by type:</p>
+                
+                <h4>Self-Propagating Malware</h4>
+                <p>Malware that spreads automatically.</p>
+                <ul class="sub-list">
+                    <li><strong>Virus:</strong> Attaches to legitimate files and spreads when executed.</li>
+                    <li><strong>Worm:</strong> Spreads over networks without user interaction.</li>
+                    <li><strong>Macro Virus:</strong> Spreads via documents (Word, Excel macros).</li>
+                </ul>
+
+                <h4>Stealth & Persistence Malware</h4>
+                <p>Designed to hide or remain undetected.</p>
+                <ul class="sub-list">
+                    <li><strong>Rootkit:</strong> Hides malware and provides privileged access.</li>
+                    <li><strong>Firmware Malware:</strong> Lives in BIOS/UEFI or hardware firmware.</li>
+                    <li><strong>Living-off-the-Land (LotL):</strong> Uses legitimate system tools maliciously.</li>
+                </ul>
+
+                <h4>Access & Control Malware</h4>
+                <p>Used to gain or maintain control over systems.</p>
+                <ul class="sub-list">
+                    <li><strong>Backdoor:</strong> Hidden access bypassing authentication.</li>
+                    <li><strong>RAT (Remote Access Trojan):</strong> Full remote control of a system.</li>
+                    <li><strong>Trojan:</strong> Disguised as legitimate software.</li>
+                    <li><strong>Loader / Dropper:</strong> Installs other malware.</li>
+                </ul>
+
+                <h4>Data Theft & Surveillance Malware</h4>
+                <p>Focused on spying and exfiltration.</p>
+                <ul class="sub-list">
+                    <li><strong>Spyware:</strong> Monitors user activity.</li>
+                    <li><strong>Keylogger:</strong> Records keystrokes.</li>
+                    <li><strong>Screen Scraper:</strong> Captures screen data.</li>
+                    <li><strong>Infostealer:</strong> Broad data theft (cookies, wallets, files).</li>
+                </ul>
+
+                <h4>Financial Malware</h4>
+                <p>Focused on monetisation.</p>
+                <ul class="sub-list">
+                    <li><strong>Ransomware:</strong> Encrypts data for payment.</li>
+                    <li><strong>Crypto Miner (Cryptojacker):</strong> Uses system resources to mine crypto.</li>
+                </ul>
+                
+                <h4>Network Malware</h4>
+                <ul class="sub-list">
+                    <li><strong>Botnet Agent:</strong> Turns a device into part of a botnet.</li>
+                    <li><strong>DDoS Malware:</strong> Launches denial-of-service attacks.</li>
+                    <li><strong>Packet Sniffer:</strong> Intercepts network traffic.</li>
+                </ul>
+
+                <p><strong>Detection:</strong> Hash comparison, sandboxing, analyzing unusual events, or uploading files to <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer">VirusTotal</a>.</p>
+
+                <h3>Data Breaches</h3>
+                <p>A data breach is when a database is compromised. This can be because of various reasons, a common one is <a href="http://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="noopener noreferrer">SQL Injection</a>. Every piece of information you give to a company is stored in a database. Companies are lawfully forced to store your activities and IP addresses. So, as you can probably notice already, it is really valuable to an attacker.</p>
+                <p>If you want to see if your password has been leaked, then you can check it by using <a href="https://haveibeenpwned.com/" target="_blank" rel="noopener noreferrer">Haveibeenpwned</a>.</p>
+            </article>
+        </section>
+
+        <!-- Hard/Expert -->
+        <section id="expert" class="hard-section">
+            <span class="difficulty-badge">Hard / Expert</span>
+            <h2>Advanced Topics</h2>
+            <p>These tips are considered overkill if you are a normal user, but can also be useful if you want to go in-depth.</p>
+
+            <article class="topic" id="l2">
+                <h3>L2 Attacks</h3>
+                <p>I won't cover them all, but I will still show them to you to let you know what an attacker can do if he is in your network (Public Wi-Fi, other hacked device in the network). Here are the most common ones:</p>
+                <ul class="sub-list">
+                    <li><a href="https://en.wikipedia.org/wiki/MAC_flooding" target="_blank" rel="noopener noreferrer">MAC Table Attacks</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/VLAN_hopping" target="_blank" rel="noopener noreferrer">VLAN Attacks</a></li>
+                    <li>DHCP Attacks:
+                        <ul>
+                            <li><a href="https://en.wikipedia.org/wiki/Rogue_DHCP" target="_blank" rel="noopener noreferrer">Rogue DHCP</a></li>
+                            <li><a href="https://en.wikipedia.org/wiki/Link_layer_security#Dynamic_Host_Configuration_Protocol_(DHCP)_starvation" target="_blank" rel="noopener noreferrer">DHCP Starvation</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="https://en.wikipedia.org/wiki/ARP_spoofing" target="_blank" rel="noopener noreferrer">ARP Spoofing</a></li>
+                </ul>
+            </article>
+
+            <article class="topic" id="tor">
+                <h3><a href="https://en.wikipedia.org/wiki/Tor_(network)" target="_blank" rel="noopener noreferrer">TOR</a> (The Onion Router)</h3>
+                <p>TOR is a network of servers from volunteers that host a private network, also known as the deep web.</p>
+                <p>There is a <a href="https://www.torproject.org/download/" target="_blank" rel="noopener noreferrer">browser</a> that you can download, where you use the TOR network. It also lets you access onion websites. Most of the criminal/dark web activities are happening here, since it is heavily private focussed. This is like a VPN but triple the privacy; it is also very slow.</p>
+                <p>Instead of 1 server, you go through 3 servers/nodes that are all in different countries. Every node has its own encryption for the next hop.</p>
+                
+                <h4>Circuit in a nutshell:</h4>
+                <ul class="sub-list">
+                    <li><strong>Entry / Guard node:</strong> Sees your IP. Knows you use TOR. Doesn’t see destination/content.</li>
+                    <li><strong>Middle relay:</strong> Sees IP from Guard and exit node. Doesn’t see your IP and destination/content.</li>
+                    <li><strong>Exit node:</strong> Sees destination. Also sees unencrypted data if the destination isn’t HTTPS. Doesn’t see your IP.</li>
+                </ul>
+                <p>Circuits also renew every 10 minutes.</p>
+            </article>
+
+            <article class="topic" id="tails">
+                <h3><a href="https://en.wikipedia.org/wiki/Tails_(operating_system)" target="_blank" rel="noopener noreferrer">Tails</a> (<strong>The Amnesic Incognito Live System</strong>)</h3>
+                <p>Tails is an operating system that you install on a USB stick. Nothing you do on there is stored, and everything is run in the RAM. When you plug it out while it is still on, or when you boot it off, the whole memory is wiped. All the network communication is routed through TOR.</p>
+                <p>You can download it <a href="https://tails.net/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+            </article>
+
+            <article class="topic" id="whonix">
+                <h3><a href="https://en.wikipedia.org/wiki/Whonix" target="_blank" rel="noopener noreferrer">Whonix</a> + <a href="https://en.wikipedia.org/wiki/Qubes_OS" target="_blank" rel="noopener noreferrer">QubesOS</a></h3>
+                <p>QubesOS is a security-focused operating system that makes use of virtualisation. Every application that you run is isolated from the others.</p>
+                <p>Whonix, on the other hand, is also an operating system, but its features should be installed on QubesOS. Whonix has two virtual machines, one that works as the Tor gateway, and a workstation that you use to do your stuff on. This is extra secure, as if someone wanted to de-anonymise you, they would need to hack you through Tor, then hack the workstation VM, then try to escape the VM and hack QubesOS, and then hack the Tor gateway VM to disable the Tor routing.</p>
+                <p>But as my first quote on top of this guide, everything is hackable. You don’t always have to take the hard way; you just need to find the easy way.</p>
+            </article>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; Guide by Phylixius.</p>
+            <p>Stay safe, stay secure.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
