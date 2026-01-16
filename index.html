@@ -132,6 +132,14 @@
             padding: 1rem 0;
             z-index: 100;
             margin-bottom: 2rem;
+            /* Transition for the auto-hide feature */
+            transition: transform 0.3s ease-in-out;
+            will-change: transform;
+        }
+
+        /* Class added via JS to hide nav */
+        nav.nav-hidden {
+            transform: translateY(-100%);
         }
 
         nav ul {
@@ -238,7 +246,7 @@
 <body>
 
     <!-- Sticky Navigation -->
-    <nav>
+    <nav id="navbar">
         <div class="container">
             <ul>
                 <li><a href="#intro">Introduction</a></li>
@@ -255,8 +263,7 @@
             <p style="text-align: center; color: var(--accent-primary);">By Phylixius</p>
             
             <blockquote class="quote-hero">
-                "The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards. And even then I have my doubts."
-                <br><span style="font-size: 0.8rem; margin-top: 0.5rem; display: block; opacity: 0.7;">— Gene Spafford</span>
+                The only truly secure system is one that is powered off, cast in a block of concrete and sealed in a lead-lined room with armed guards. And even then I have my doubts - Gene Spafford
             </blockquote>
         </div>
     </header>
@@ -267,14 +274,20 @@
         <section id="intro">
             <div class="author-intro">
                 <h2>Introduction</h2>
-                <p>This is a comprehensive guide made by <strong>Phylixius</strong> on how you should operate securely and stay safe online. This will not include everything, as new threats come out every day. I will try to explain things as easily as possible and provide a technical explanation. This document will be divided into 3 main categories.</p>
+                <p>This is a comprehensive guide made by Phylixius on how you should operate securely and stay safe online. This will not include everything, as new threats come out every day. I will try to explain things as easily as possible and provide a technical explanation. This document will be divided into 3 main categories, which are as follows:</p>
+                
+                <ul>
+                    <li>Easy/Beginner</li>
+                    <li>Medium/Amateur</li>
+                    <li>Hard/Expert</li>
+                </ul>
+
                 <p>While it does contain a technical explanation, it is surely not the whole thing. There’s a lot more behind the scenes. I want to balance technical with simplification. I think you should know a bit of the background, as you can’t do something that you don’t know much about.</p>
                 
-                <h3>Who am I?</h3>
-                <p>I have been a Computer and Internet enthusiast since the day I was born. I have a lot of passion for all sorts of tech, and I am eager to learn, which has led me to where I am now. If I give one sentence as a tip, it would be: <em>research, tinkering, patience, and repeat</em>.</p>
-                <p>If you are genuinely interested in my experience, I have written a brief profile of myself on my portfolio. You can see it <a href="http://appel-man.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+                <h3>First of all, who am I?</h3>
+                <p>I have been a Computer and Internet enthusiast since the day I was born. I have a lot of passion for all sorts of tech, and I am eager to learn, which has led me to where I am now. If I give one sentence as a tip, it would be: <em>research, tinkering, patience, and repeat</em>. I could tell a lot more about myself in much more detail, but luckily, I have already done that. If you are genuinely interested in my experience, I have written a brief profile of myself on my portfolio. You can see it <a href="http://appel-man.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">here</a>.</p>
                 
-                <p style="margin-top: 2rem;">Anyways, enough about me, let’s explain some cybersecurity topics!</p>
+                <p>Anyways, enough about me, let’s explain some cybersecurity topics!</p>
             </div>
         </section>
 
@@ -290,7 +303,9 @@
                 <p>You have two types of IP addresses (thanks to <a href="https://en.wikipedia.org/wiki/Network_address_translation" target="_blank" rel="noopener noreferrer">network address translation</a>/NAT):</p>
                 <ul class="sub-list">
                     <li>
-                        <strong>Private IP address:</strong> This is needed to communicate on your <a href="https://en.wikipedia.org/wiki/Local_area_network" target="_blank" rel="noopener noreferrer">local area network</a> (LAN), like the devices in a house or a company. A private IP address of a device in your home network can be reused in another home network. A private IP address is only relevant if you are in that local network; thus, it is not harmful for others to know.
+                        <strong>Private IP address:</strong> This is needed to communicate on your <a href="https://en.wikipedia.org/wiki/Local_area_network" target="_blank" rel="noopener noreferrer">local area network</a> (LAN), like the devices in a house or a company. A private IP address of a device in your home network can be reused in another home network.
+                        <br><br>
+                        A private IP address is only relevant if you are in that local network; thus, it is not harmful for others to know. And if they have already gained access to your home network, they can simply scan for devices on the network.
                     </li>
                     <li>
                         <strong>Public IP address:</strong> This is necessary for communicating over the internet when you leave your LAN (traffic exiting the router/modem). Every device on the internet that you contact can see your public IP address (websites, apps, games, …).
@@ -299,7 +314,9 @@
                         <br><br>
                         It is impossible to know your exact physical location by the IP address itself, unless you hack into the ISP’s systems. However, ISPs can have data breaches as well. It is also possible by matching your IP address to other stolen data in other data breaches (emails, old accounts, social media) that contain your IP address and additional information. It is by hand of combinations of information (username, old posts, photos with metadata) that you can puzzle to find your location, this is called cross-referencing.
                         <br><br>
-                        If they really want to, they could also DDOS you, or scan for open ports (ports you forwarded, for example, for a website you host or a Minecraft server), and attack the service itself. That’s why it’s important to keep your computer and the stuff that’s running on it up to date. You shouldn’t port forward in the first place if you don’t have a security background.
+                        If they really want to, they could also DDOS you, more on that later.
+                        <br><br>
+                        Another attack they can do is scanning for open ports (ports you forwarded, for example, for a website you host or a Minecraft server), and attack the service itself. So let’s say you have a computer hosting a Minecraft server, then they can attack it to take over that computer. That’s why it’s important to keep your computer and the stuff that’s running on it up to date. You shouldn’t port forward in the first place if you don’t have a security background. If you are unsure if you have open ports, check it in your router settings, or fill in your IP address in <a href="https://www.shodan.io/" target="_blank" rel="noopener noreferrer">Shodan</a>, but it isn’t up to date.
                     </li>
                 </ul>
             </article>
@@ -318,24 +335,27 @@
 
             <article class="topic" id="vpn">
                 <h3><a href="https://en.wikipedia.org/wiki/Virtual_private_network" target="_blank" rel="noopener noreferrer">VPN</a> (Virtual Private Network)</h3>
-                <p>A VPN is an overlay network; it creates a logical/virtual network topology. Simply said, it is a tunnel between you and the VPN server. All your network traffic that goes over the internet first goes through the tunnel and then to its destination. In most cases, local traffic to your LAN doesn’t pass the tunnel. Most VPN tunnels are encrypted. For the things you visit (games, websites, …), they will see your VPN server’s IP address.</p>
+                <p>A VPN is an overlay network; it creates a logical/virtual network topology.</p>
+                <p>Simply said, it is a tunnel between you and the VPN server. All your network traffic that goes over the internet first goes through the tunnel and then to its destination. In most cases, local traffic to your LAN doesn’t pass the tunnel. Most VPN tunnels are encrypted. For the things you visit (games, websites, …), they will see your VPN server’s IP address.</p>
                 <p><strong>Is it 100% private?</strong> You don’t know; most VPN services claim to have a no-log policy, but that’s up to you to believe. A no-log policy means that they don’t log your activities.</p>
                 
                 <p>Things that can still leak the VPN:</p>
                 <ul class="sub-list">
-                    <li>If WebRTC is enabled and the VPN isn’t configured correctly.</li>
-                    <li>Some DNS scenarios.</li>
+                    <li>If WebRTC is enabled (which is in some browsers) and the VPN isn’t configured correctly, then the WebRTC traffic does not go through your VPN.</li>
+                    <li>Some DNS scenarios (ISP DNS, router DNS, hardcoded DNS, hardcoded means it is written in the software code).</li>
                     <li>IPv6 traffic (when the VPN only handles IPv4 traffic).</li>
-                    <li>Split tunnelling.</li>
-                    <li>Sometimes hardcoded IPs.</li>
+                    <li>Split tunnelling (configuration to only allow certain applications).</li>
+                    <li>Sometimes hardcoded IPs that don’t use the DNS (game launchers, anti-cheat, DRM systems, some crypto wallets).</li>
                     <li>UDP traffic (When the VPN only tunnels TCP traffic).</li>
                     <li>Sometimes torrent clients.</li>
-                    <li>VPN reconnect/short drops.</li>
+                    <li>VPN reconnect/short drops (sleep/wake, Wi-Fi switch, only when VPN doesn’t handle these).</li>
                     <li>ICMP (if the VPN doesn’t support this).</li>
                     <li>Malware/spyware.</li>
                 </ul>
-                
+
                 <p>It is also a common misunderstanding that all traffic before your VPN was turned on will be forgotten. For example, when you sign up for an account without a VPN, that information will be logged and remembered, no matter how many times you use your VPN afterwards.</p>
+
+                <p><strong>Should you always use a VPN?</strong> Well, it depends on your scenario. Modern VPNs come with extra security features, but aren’t 100% needed. They market it like it is a must-have tool, but it isn’t so badly needed.</p>
                 
                 <p>When you should use it:</p>
                 <ul class="sub-list">
@@ -350,7 +370,7 @@
                 <h3>Proxy</h3>
                 <p>A proxy is similar to a VPN, but without all the fancy stuff. It routes all traffic to a proxy server, thus changing your IP to the proxy server’s IP.</p>
                 <p>There are several types of proxies. But the one I advise you to use when visiting links you don’t trust is a webproxy.</p>
-                <p>A good webproxy that I use a lot is <a href="https://proxyium.com/" target="_blank" rel="noopener noreferrer">Proxyium</a>. You just paste the link in there, and it will all run on the proxy server. Keep in mind that they can still get all user-end/front-end/browser-side information. Only the IP changes.</p>
+                <p>A good webproxy that I use a lot is <a href="https://proxyium.com/" target="_blank" rel="noopener noreferrer">Proxyium</a>. You just paste the link in there, and it will all run on the proxy server. Keep in mind that they can still get all user-end/front-end/browser-side information. Only the IP changes. Thus, things like which browser you use, which OS you have. If they fetch your IP address on your browser side, then that doesn’t matter, because that request is always routed via the proxy.</p>
             </article>
 
             <article class="topic" id="opsec">
@@ -359,13 +379,74 @@
                 
                 <h4>Examples of good opsec:</h4>
                 <ul class="sub-list">
-                    <li><strong>Don’t share any PII (Personal Identifiable Information):</strong> Birthday/age, location, name parts, school/hobby, gender, phone/email (use <a href="https://temp-mail.org/en/" target="_blank" rel="noopener noreferrer">Temp-mail</a>, <a href="https://simplelogin.io/" target="_blank" rel="noopener noreferrer">SimpleLogin</a>, or <a href="https://addy.io/" target="_blank" rel="noopener noreferrer">AnonAddy</a>), health conditions, browsing history, preferences.</li>
-                    <li><strong>Indirect Identification:</strong> Texting style, grammar habits, emoji usage, time of day active, sleep schedule, posting frequency, topics you talk about, niche interests, usernames, who you reply to, conflict resolution style, OS used, microphone background noise, weather/local events.</li>
-                    <li><strong>Metadata:</strong> Image metadata (EXIF), file creation, file author, screenshot resolutions, file names.</li>
+                    <li><strong>Don’t share any PII (Personal Identifiable Information):</strong>
+                        <ul>
+                            <li>Birthday/age/date of birth</li>
+                            <li>Any location, like a country you live in or are going to vacation in, even Europe, place of birth</li>
+                            <li>Any letters of your name</li>
+                            <li>Your school or hobby</li>
+                            <li>Gender</li>
+                            <li>Phone/email address (use burner email when making accounts like <a href="https://temp-mail.org/en/" target="_blank" rel="noopener noreferrer">Temp-mail.org</a>, or make aliases like <a href="https://simplelogin.io/" target="_blank" rel="noopener noreferrer">SimpleLogin</a> or <a href="https://addy.io/" target="_blank" rel="noopener noreferrer">AnonAddy</a>)</li>
+                            <li>Health conditions</li>
+                            <li>Browsing History</li>
+                            <li>Preferences and habits</li>
+                            <li>A lot more</li>
+                        </ul>
+                    </li>
+                    <li><strong>Indirect Identification</strong>
+                        <ul>
+                            <li><strong>Texting/Chatting</strong>
+                                <ul>
+                                    <li>Typing style</li>
+                                    <li>Spelling mistakes</li>
+                                    <li>Grammar habits</li>
+                                    <li>Emoji usage</li>
+                                    <li>Slang phrases</li>
+                                    <li>Capitalization</li>
+                                    <li>Time of day you’re active</li>
+                                    <li>Sleep scheduling</li>
+                                    <li>Posting frequency</li>
+                                    <li>Response speed</li>
+                                    <li>Days you’re most active</li>
+                                    <li>Topics you talk about</li>
+                                    <li>Niche interests</li>
+                                    <li>Opinions</li>
+                                    <li>Usernames</li>
+                                    <li>Who do you reply to</li>
+                                    <li>Who you argue with or support</li>
+                                    <li>How you structure replies</li>
+                                    <li>Reactions</li>
+                                    <li>Emotional response</li>
+                                    <li>Humor style</li>
+                                    <li>Conflict resolution style</li>
+                                    <li>Over/under explaining</li>
+                                </ul>
+                            </li>
+                            <li><strong>Other</strong>
+                                <ul>
+                                    <li>Operating System (Windows, iPhone)</li>
+                                    <li>Microphone background noise</li>
+                                    <li>Keyboard sounds</li>
+                                    <li>Weather/local events</li>
+                                    <li>Holidays you reference</li>
+                                    <li>School/work schedule clues</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>Metadata</strong>
+                        <ul>
+                            <li>Image metadata (EXIF)</li>
+                            <li>File creation</li>
+                            <li>File author</li>
+                            <li>Screenshot resolutions</li>
+                            <li>File names</li>
+                        </ul>
+                    </li>
                 </ul>
-                
+
                 <div class="warning-box">
-                    <strong>Hear me out:</strong> it’s not because you leaked one of them that your identity instantly gets leaked, it is by the combination of them. So next time you make an alt account, know that everyone knows what you do. Another thing is that people like talking about themselves; don’t do that, all of it can be used against you.
+                    <strong>Hear me out:</strong> it’s not because you leaked one of them that your identity instantly gets leaked, it is by the combination of them. So next time you make an alt account, know that everyone knows what you do. Another thing is that people like talking about themselves; don’t do that, all of it can be used against you. Think of it when you break up with someone or are in an argument with your friend, but worse.
                 </div>
 
                 <p>A privacy-focused browser that I highly recommend is <a href="https://duckduckgo.com/" target="_blank" rel="noopener noreferrer">DuckDuckGo</a>, and for a privacy and security-focused communication app, I recommend <a href="https://getsession.org/" target="_blank" rel="noopener noreferrer">Session</a>.</p>
@@ -382,49 +463,65 @@
                 </ul>
                 <p>A passkey is stored on your device, which also means that if it is stolen and unlocked, they have access to it. Thus, malware is also a thing. Attackers can also social engineer you if you are vulnerable to it. The way they are synchronised (iCloud, Google Password Manager) can be a target as well, thus not syncing them is a security feature.</p>
                 <p>A passkey combines something you have (your device) and something you are/know (biometric/PIN). It also only works with HTTPS.</p>
-                <p>Should you completely replace MFA and passwords with passkeys? I 100% do, but under one condition: If you don’t have access to the device you have the passkey on, your account will be lost; thus, store them on multiple devices, and you are good to go. Or you can just buy a YubiKey.</p>
+                <p>Should you completely replace MFA and passwords with passkeys? I 100% do, but under one condition: If you don’t have access to the device you have the passkey on, your account will be lost; thus, store them on multiple devices, and you are good to go. Or you can just buy a YubiKey, which is a USB device that you store in your.</p>
             </article>
 
             <article class="topic" id="soceng">
                 <h3><a href="https://en.wikipedia.org/wiki/Social_engineering_(security)" target="_blank" rel="noopener noreferrer">SOCENG</a> (Social Engineering)</h3>
                 <p>Social Engineering, how I would say it, is hacking humans. The most common attack method hackers use.</p>
-                <p>Social Engineering has several forms: Phishing, Pretexting, Baiting, Impersonation, Tailgating / Piggybacking, Scareware, Reverse Social Engineering, BitB (Browser in the Browser), and more.</p>
-                <p>It might sound harmless and dumb to fall for, but it is actually the most dangerous and largest vulnerability a company or group has. Humans are social creatures; keep that in mind.</p>
+                <p>Social Engineering has several forms, which are the following:</p>
+                <ul class="sub-list">
+                    <li>Phishing</li>
+                    <li>Pretexting (creating false scenarios)</li>
+                    <li>Baiting (Files/USB labelled as “confidential” or “salaries”)</li>
+                    <li>Impersonation</li>
+                    <li>Tailgating / Piggybacking (Following someone into a restricted area, claiming to have forgotten a badge, carrying boxes to appear legitimate)</li>
+                    <li>Scareware to disable your critical thinking (Fake virus alert, “Your account will be closed in 24 hours”, NFSW, hacked, someone trying to log in)</li>
+                    <li>Reverse Social Engineering (Attacker makes victim ask attacker for help)</li>
+                    <li>BitB (Browser in the Browser, where they fake a new browser window that’s actually just in the browser; you can check this if you can’t move that window outside the browser)</li>
+                    <li>And more</li>
+                </ul>
+                <p>It might sound harmless and dumb to fall for, but it is actually the most dangerous and largest vulnerability a company or group has. Because here is the thing: your staff is your weakest spot. Just because there are many of them, and because they don’t believe or know what Soceng actually can do. Humans are social creatures; keep that in mind.</p>
                 
                 <h4>Here are some examples in Discord:</h4>
                 <ul class="sub-list">
-                    <li>Someone asks you to copy and paste a message, which can get you banned or your whole server raided.</li>
-                    <li>You join a new gaming server and verify your account with a verified bot, and boom, your account has been stolen (QR Code).</li>
-                    <li>You see an image with a mouse, and an arrow pointing to the middle mouse wheel, saying middle-click this image. You do it, and boom, your IP, ISP, Browser name, OS name got leaked (grabbing website).</li>
-                    <li>Your face got leaked by someone, he claims, but the image with your face keeps loading. You open it up in your browser and boom, your data got leaked (grabbing website).</li>
-                    <li>Someone asks you to chat on another platform. You call each other on Zoom/telegram/whatever, and boom, your IP got leaked (P2P).</li>
-                    <li><strong>Password Reset Phishing:</strong> A fake Discord bot messages you about a password reset, sends you to a fake site (AitM), you log in and fill in MFA, and they steal your cookie.</li>
-                    <li>A GFX artist asks you to screenshare or sends you a video on how to get your avatar. It asks you to go to developer tools (F12) and download a file (HAR file), and boom, she got your cookie.</li>
-                    <li>Someone threatens to ban you and asks for a PC check. They ask you to open developer tools and scroll through your network tab, and boom, he got your cookie.</li>
+                    <li>Someone asks you to copy and paste a message, which can get you banned or your whole server raided. (for security reasons, I won't disclose further details)</li>
+                    <li>You join a new gaming server with 1k members actively chatting, and you verify your account with a verified bot, and boom, your account has been stolen. (QR Code, no further details)</li>
+                    <li>You see an image with a mouse, and an arrow pointing to the middle mouse wheel, saying middle-click this image, you do it, and boom, your IP, ISP, Browser name, OS name, … got leaked. (grabbing website)</li>
+                    <li>Your face got leaked by someone, he claims, but the image with your face keeps loading, and you open it up in your browser and boom, IP, ISP, browser name, OS name got leaked. (grabbing website)</li>
+                    <li>Someone asks you to chat on another platform that is safer and more private, or for whatever reason. You call each other on Zoom/telegram/whatever, and boom, your IP got leaked. (P2P)</li>
+                    <li><strong>Password Reset Phishing Scenario:</strong> You got messaged by a bot named Discord with a blue Discord logo. He says you requested that your password be reset because you forgot it. You ignore it, 10 minutes later, he says your password has been successfully reset. If it wasn’t you, he says you need to undo it and check your security features by following this exact official Discord link. You click on it and need to log in to Discord (because your password has been reset). You do so; luckily, you enabled MFA, so Discord asks you to give the MFA code. Like usual, you go to your authenticator app and fill in the code, and you are logged into Discord. Everything is normal, you get a message from the same Discord bot saying you have undone your password reset, and you should use passkeys (just for security purposes, you didn’t do that in this example, it’s just for gaining trust). This whole thing was fake. And the attacker stole your cookie.
+                        <br><br>
+                        <strong>How he got your cookie:</strong> He made a fake Discord bot using the same name as the real Discord bot. He messaged you a message saying someone reset your password with a link to do so. The link was to a fake Discord clone, but the link itself looked the same as Discord’s domain, etc. You ignore that. The bot has a timer of 10 minutes. If you didn’t fill in your credentials in time, he will send you another message saying your password has been reset with a link to undo it (same Discord exact domain), but when you click it, you get this pop-up, like always, to check the URL (it was different). But you trust the Discord bot, are panicked, and never check it because it’s annoying. You visit the login screen, which is actually Discord, but an AitM (more on that later). You log in, and everything is normal. The bot detected your login and sent you a message that your password reset has been undone as if nothing happened.
+                    </li>
+                    <li>A GFX artist asks you to use your avatar, and you agree. She asks you to screenshare or sends you a video with 100k views on how to get your avatar officially. The video says you need to press F12, go to your avatar tab, download a file of your avatar and send it to her and boom, she got your cookie. (HAR file)</li>
+                    <li>Someone thinks you are cheating and turns the whole group on you and threatens you to ban you or put you in cheater databases. You didn’t do anything and asked for a PC check, they PC check you, ask you to do a bunch of legit PC checking things, searching for exploits and injectors in your search history, etc. He asks you to open developer tools and scroll through your exploit logs, and boom, he got your cookie. (Scrolled in the network tab through your network headers and thus also your cookies)</li>
                 </ul>
 
                 <div class="warning-box">
                     <strong>You should never do the following:</strong>
                     <ul>
                         <li>Open the developer console/pressing F12 when someone asks you to.</li>
-                        <li>Open link shorteners.</li>
-                        <li>Download any file from the internet (especially if it’s a ZIP file with a password).</li>
+                        <li>Open link shortener.</li>
+                        <li>Download any file from the internet (if it’s a ZIP file with a password, that’s a massive red flag, as antivirus software can’t see what’s in a password-protected ZIP file).</li>
                     </ul>
                 </div>
 
                 <p><strong>And always should do the following:</strong></p>
                 <ul class="sub-list">
                     <li>Hover over links or check the open link warnings to see the true link.</li>
-                    <li>Put the link in <a href="https://www.virustotal.com/gui/home/url" target="_blank" rel="noopener noreferrer">VirusTotal</a> to check if it is malicious.</li>
+                    <li>Put the link in <a href="https://www.virustotal.com/gui/home/url" target="_blank" rel="noopener noreferrer">VirusTotal</a> to check if it is malicious, or search the domain in Google (not visiting the website, just searching if the link is known to be trusted).</li>
                     <li>Put the link in a webproxy as I said earlier.</li>
                 </ul>
-                
-                <p>If you want to test your phishing detection skills, take <a href="https://phishingquiz.withgoogle.com/" target="_blank" rel="noopener noreferrer">Google’s Phishing Quiz</a>.</p>
+
+                <p>If no one ever tried to scam you, or you have been scammed before, or you are smart and want to avoid these situations, then I strongly suggest not letting anyone add you as a friend or private message you. Even people you trust, because an attacker can buy a non-alternative account looking account of the market, build a strong relationship with you to gain trust, or a friend that you already trust that got hacked. Because if they can’t get to you directly, they will go through your friends or people you trust.</p>
+                <p>If you want to test your phishing detection skills, then here is a test you should consider taking: <a href="https://phishingquiz.withgoogle.com/" target="_blank" rel="noopener noreferrer">Google’s Phishing Quiz</a>.</p>
             </article>
 
             <article class="topic" id="cookies">
                 <h3>Cookie/Session Token</h3>
-                <p>A cookie/session token’s only purpose is for a better user experience. When you log into Instagram, for example. You want to stay logged in. You don’t need to give your credentials every time you revisit Instagram. For this to work, the website needs to remember you. Every time you log in, the server will store your cookie in your browser.</p>
+                <p>A cookie/session token’s only purpose is for a better user experience.</p>
+                <p>When you log into Instagram, for example. You want to stay logged in. You don’t need to give your credentials every time you revisit Instagram. For this to work, the website needs to remember you. Every time you log in, the server will store your cookie in your browser. Because when it doesn’t, you will be forgotten.</p>
                 <p><strong>In short:</strong></p>
                 <ul class="sub-list">
                     <li>A cookie is a value stored in your browser that will be remembered when you reopen your browser or restart your PC. It is to remember website preferences and anything that the website needs to remember.</li>
@@ -436,7 +533,8 @@
 
             <article class="topic" id="dos">
                 <h3><a href="https://en.wikipedia.org/wiki/Denial-of-service_attack" target="_blank" rel="noopener noreferrer">DoS Attack</a> (Denial of Service)</h3>
-                <p>This is a cyber attack where an attacker wants to take down a service; it could be caused by anything. The most common method is by a DDoS (Distributed DoS), this is where an attacker uses a large number of (mostly infected) devices that flood your bandwidth/resources. If you want to see this in action, visit <a href="https://horizon.netscout.com/" target="_blank" rel="noopener noreferrer">this</a> webpage.</p>
+                <p>This is a cyber attack where an attacker wants to take down a service; it could be caused by anything.</p>
+                <p>The most common method is by a DDoS (Distributed DoS), this is where an attacker uses a large number of (mostly infected) devices that flood your bandwidth/resources. If you want to see this in action, then you can visit <a href="https://horizon.netscout.com/" target="_blank" rel="noopener noreferrer">this</a> webpage.</p>
                 <p>Other methods are, for example, an exploit that crashes a web server so it’s not reachable anymore. It is just the practice of making a service unreachable.</p>
             </article>
         </section>
@@ -449,44 +547,64 @@
 
             <article class="topic" id="dns">
                 <h3><a href="https://en.wikipedia.org/wiki/Domain_Name_System" target="_blank" rel="noopener noreferrer">DNS</a> (Domain Name System/Server)</h3>
-                <p>Simply said, DNS’s main purpose is to translate domain names into IP addresses. We, as humans, can remember text better than numbers. If you visit a website, like YouTube, then you type youtube.com, and not an IP address. This is thanks to the DNS server. It is a decentralised network of databases that contains all domain names with their IP addresses.</p>
-                <p>If the attacker is in your network (Cafe, restaurant, free Wi-Fi), then he could give you a fake DNS server through various methods. So, it could show you another website under the same domain name (only works with HTTP, not HTTPS). This is called <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack" target="_blank" rel="noopener noreferrer">MITM</a> (Man In The Middle).</p>
-                <p>DNS traffic is also not encrypted by default. Because of this, everything between your device and the DNS server could see which domains you requested. You can enable encryption for DNS without a VPN, but it isn’t easy to enable. If you really want to, then you can use <a href="https://en.wikipedia.org/wiki/DNS_over_HTTPS" target="_blank" rel="noopener noreferrer">DoH</a> (DNS over HTTPS).</p>
+                <p>Simply said, DNS’s main purpose is to translate domain names into IP addresses. We, as humans, can remember text better than numbers. If you visit a website, like YouTube, then you type youtube.com, and not an IP address. This is thanks to the DNS server. It is a decentralised network of databases that contains all domain names (like youtube.com) with their IP addresses. They remember it for us.</p>
+                <p>If the attacker is in your network (Cafe, restaurant, free Wi-Fi), then he could give you a fake DNS server through various methods. So, it could show you another website under the same domain name (only works with HTTP, not HTTPS). This is called <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack" target="_blank" rel="noopener noreferrer">MITM</a> (Man In The Middle, someone between you and the connection). Here, an attacker can show you a fake page for YouTube that works.</p>
+                <p>DNS traffic is also not encrypted by default. Because of this, everything between your device and the DNS server could see which domains you requested, as well as an MITM attacker. You can enable encryption for DNS without a VPN, but it isn’t easy to enable and won’t be covered. If you really want to, then you can use <a href="https://en.wikipedia.org/wiki/DNS_over_HTTPS" target="_blank" rel="noopener noreferrer">DoH</a> (DNS over HTTPS). There are more options, but this is the most popular one.</p>
             </article>
 
             <article class="topic" id="xss">
                 <h3><a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank" rel="noopener noreferrer">XSS</a> (Cross-Site-Scripting)</h3>
-                <p><strong>Scenario:</strong> You have a Discord concern or question, but aren’t familiar with the Discord blog, so you just ask in a server. Someone replied and said we should go in DMs. He gives you the link to the official Discord blog post (an actual link, no phishing). You visit the authentic website, and boom, your cookie has been stolen.</p>
-                <p><strong>How?</strong> You checked the domain, used a VPN, didn’t give any input. This is because an attacker used XSS. Simply said, XSS is injecting your own script into the browser. Almost every website has JavaScript to make it function. But if the website is not secure enough, an attacker could inject their own script.</p>
-                <p>Okay, so how did it happen in the scenario: An attacker commented on the official blog post with a normal message like “Thank you, I almost got my password reset” along with the XSS script. Now, every time you visit that page, the page will load all its contents, including the comments and thus also the script that was injected, and run it. I have to say that this is very rare, as this constantly gets patched.</p>
+                <p><strong>Scenario:</strong> You have a Discord concern or question, but aren’t familiar with the Discord blog, so you just ask in a server. Someone replied and said we should go in DMs, as otherwise the server gets annoyed with this question. He explained in short, but for more information, he says you should consult the official blog post and gives you the link to the official Discord blog post (an actual link, no phishing or fake domain), which goes to the official Discord blog forum with an admin talking about how to secure your account. And boom, your cookie has been stolen.</p>
+                <p><strong>But wait… How?</strong></p>
+                <ul class="sub-list">
+                    <li>Checked the domain on every corner</li>
+                    <li>Used a VPN</li>
+                    <li>Didn’t give any input except for visiting the exact, authentic official Discord website</li>
+                </ul>
+                <p>This is because an attacker used XSS. Simply said, XSS is injecting your own script into the browser. Almost every website has JavaScript, a programming language, to make a website function. Like when you press the login button, you get brought to the normal page and are logged in to your account. But if the website is not secure enough, an attacker could inject their own script into the browser.</p>
+                <p>Okay, so how did it happen in the scenario: An attacker commented on the official blog post with a normal message like “Thank you, I almost got my password reset” along with the XSS script. And now, every time you visit that page, the page will load all its contents, including the comments and thus also the script that was injected, and run it.</p>
+                <p>I have to say that this is very rare, as this constantly gets patched. Vulnerabilities like these are hard to find. But it is possible.</p>
             </article>
 
             <article class="topic" id="aitm">
                 <h3>AitM (Adversary in the Middle)</h3>
                 <p>AitM is a man-in-the-middle attack combined with phishing.</p>
                 <p>AitM works with two connections instead of one. One between you and the attacker’s server, and the attacker’s server between the legit website you wanted to visit.</p>
-                <code>[You] &larr; conn1 &rarr; [fakegoogle.com] &larr; conn2 &rarr; [google.com]</code>
+                <code>[You] ← Website connection 1 → [fakegoogle.com] ← Website connection 2 → [google.com]</code>
                 <br><br>
-                <p>So let’s say you got baited on a fake Google website. The attacker’s server asks real Google to log in, gets that page, and forwards that to you. When you give your credentials, it will first go to the attacker’s server, and he will forward that to Google. Maybe you enabled MFA, so Google replies with the MFA page, and the attacker sends it to you. Then you fill in your code, and that will also be sent to the attacker's machine and so to Google. Then Google will reply with your dashboard/home page, and thus also containing your cookie, which the attacker will grab.</p>
+                <p>So let’s say you got baited on a fake Google website, the attacker’s server asks real Google to log in, gets that page, and forwards that to you. When you give your credentials, it will first go to the attacker’s server, and he will forward that to Google. Maybe you enabled MFA, so Google replies with the MFA page, and the attacker sends it to you. Then you fill in your code, and that will also be sent to the attacker's machine and so to Google. Then Google will reply with your dashboard/home page, and thus also containing your cookie, which the attacker will grab, and then redirect you to the actual Google, or just keep forwarding Google’s website.</p>
                 <p><strong>Solution to this:</strong> Passkey.</p>
             </article>
 
             <article class="topic" id="zta">
                 <h3><a href="https://en.wikipedia.org/wiki/Zero_trust_architecture" target="_blank" rel="noopener noreferrer">ZTA</a> (Zero-Trust Architecture)</h3>
-                <p>The Zero-Trust Architecture is a cybersecurity model based on one core idea: <em>Never trust anything by default — always verify.</em></p>
+                <p>The Zero-Trust Architecture is a cybersecurity model based on one core idea:</p>
+                <blockquote style="border-left: 4px solid var(--accent-primary); padding-left: 1rem; color: var(--text-muted);">Never trust anything by default — always verify.</blockquote>
                 <p>That applies to everything: users, devices, applications, and network traffic, whether they’re inside or outside the network/group.</p>
                 <p><strong>In general:</strong></p>
                 <ul class="sub-list">
                     <li>No implicit trust, even inside the network/group.</li>
                     <li>Every request is verified every time.</li>
-                    <li>Access is limited to exactly what is needed (Users and services get only the permissions they need).</li>
-                    <li>Breaches are assumed to happen (Design systems as if attackers are already inside).</li>
+                    <li>Access is limited to exactly what is needed.
+                        <ul>
+                            <li>Users and services get only the permissions they need.</li>
+                            <li>Access is time-limited and task-specific.</li>
+                            <li>Reduces damage if an account is compromised.</li>
+                        </ul>
+                    </li>
+                    <li>Breaches are assumed to happen.
+                        <ul>
+                            <li>Design systems as if attackers are already inside.</li>
+                            <li>Segment systems to limit blast radius.</li>
+                            <li>Continuous monitoring and logging.</li>
+                        </ul>
+                    </li>
                 </ul>
             </article>
 
             <article class="topic" id="malware">
                 <h3>Malware (Malicious Software)</h3>
-                <p>There are various forms of malware; here are the most common ones categorized by type:</p>
+                <p>There are various forms of malware; here are the most common ones:</p>
                 
                 <h4>Self-Propagating Malware</h4>
                 <p>Malware that spreads automatically.</p>
@@ -511,6 +629,7 @@
                     <li><strong>RAT (Remote Access Trojan):</strong> Full remote control of a system.</li>
                     <li><strong>Trojan:</strong> Disguised as legitimate software.</li>
                     <li><strong>Loader / Dropper:</strong> Installs other malware.</li>
+                    <li><strong>Command-and-Control (C2) Agent:</strong> Communicates with attacker servers.</li>
                 </ul>
 
                 <h4>Data Theft & Surveillance Malware</h4>
@@ -519,6 +638,7 @@
                     <li><strong>Spyware:</strong> Monitors user activity.</li>
                     <li><strong>Keylogger:</strong> Records keystrokes.</li>
                     <li><strong>Screen Scraper:</strong> Captures screen data.</li>
+                    <li><strong>Credential Stealer:</strong> Steals passwords/tokens.</li>
                     <li><strong>Infostealer:</strong> Broad data theft (cookies, wallets, files).</li>
                 </ul>
 
@@ -527,19 +647,33 @@
                 <ul class="sub-list">
                     <li><strong>Ransomware:</strong> Encrypts data for payment.</li>
                     <li><strong>Crypto Miner (Cryptojacker):</strong> Uses system resources to mine crypto.</li>
+                    <li><strong>Adware:</strong> Forces ads or redirects (sometimes borderline malware).</li>
                 </ul>
                 
                 <h4>Network Malware</h4>
+                <p>Targets networks or services.</p>
                 <ul class="sub-list">
                     <li><strong>Botnet Agent:</strong> Turns a device into part of a botnet.</li>
                     <li><strong>DDoS Malware:</strong> Launches denial-of-service attacks.</li>
                     <li><strong>Packet Sniffer:</strong> Intercepts network traffic.</li>
+                    <li><strong>Man-in-the-Middle Malware:</strong> Alters communications.</li>
+                    <li><strong>Proxy Malware:</strong> Turns the device into a traffic relay.</li>
                 </ul>
 
-                <p><strong>Detection:</strong> Hash comparison, sandboxing, analyzing unusual events, or uploading files to <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer">VirusTotal</a>.</p>
+                <p>There are various ways to detect malware. Some examples are the following:</p>
+                <ul class="sub-list">
+                    <li>A hash/fingerprint of the malware file is compared to a large database of registered malware hashes.</li>
+                    <li>Running it in a sandbox/virtual machine and see what it does.</li>
+                    <li>Detecting a bunch of unusual/malwareish events.</li>
+                    <li>Uploading the file to <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer">VirusTotal</a>.</li>
+                </ul>
 
                 <h3>Data Breaches</h3>
-                <p>A data breach is when a database is compromised. This can be because of various reasons, a common one is <a href="http://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="noopener noreferrer">SQL Injection</a>. Every piece of information you give to a company is stored in a database. Companies are lawfully forced to store your activities and IP addresses. So, as you can probably notice already, it is really valuable to an attacker.</p>
+                <p>A data breach is when a database is compromised. This can be because of various reasons, a common one is <a href="http://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="noopener noreferrer">SQL Injection</a>.</p>
+                <p>Every piece of information you give to a company, via websites or whatever, is stored in a database. Thus, your email, name, billings, and maybe a picture of your face or passport, because you verified your age, your IP address and so on.</p>
+                <p>Companies are lawfully forced to store your activities and IP addresses. So, as you can probably notice already, it is really valuable to an attacker.</p>
+                <p>If you didn’t know already, the world is constantly under cybersecurity threats, it’s not always a human; this is all automated through botnets and servers. You can see a livemap from Fortinet <a href="https://fortiguard.fortinet.com/threat-map" target="_blank" rel="noopener noreferrer">here</a>.</p>
+                <p>They sell your data or post it on forums on the dark web. Other people who want to hack you just consult these and use them. That’s why you should never use the same passwords for your accounts and should change them often.</p>
                 <p>If you want to see if your password has been leaked, then you can check it by using <a href="https://haveibeenpwned.com/" target="_blank" rel="noopener noreferrer">Haveibeenpwned</a>.</p>
             </article>
         </section>
@@ -552,7 +686,8 @@
 
             <article class="topic" id="l2">
                 <h3>L2 Attacks</h3>
-                <p>I won't cover them all, but I will still show them to you to let you know what an attacker can do if he is in your network (Public Wi-Fi, other hacked device in the network). Here are the most common ones:</p>
+                <p>I won't cover them all, but I will still show them to you to let you know what an attacker can do if he is in your network (Public Wi-Fi, other hacked device in the network).</p>
+                <p>Here are the most common ones:</p>
                 <ul class="sub-list">
                     <li><a href="https://en.wikipedia.org/wiki/MAC_flooding" target="_blank" rel="noopener noreferrer">MAC Table Attacks</a></li>
                     <li><a href="https://en.wikipedia.org/wiki/VLAN_hopping" target="_blank" rel="noopener noreferrer">VLAN Attacks</a></li>
@@ -569,15 +704,36 @@
             <article class="topic" id="tor">
                 <h3><a href="https://en.wikipedia.org/wiki/Tor_(network)" target="_blank" rel="noopener noreferrer">TOR</a> (The Onion Router)</h3>
                 <p>TOR is a network of servers from volunteers that host a private network, also known as the deep web.</p>
-                <p>There is a <a href="https://www.torproject.org/download/" target="_blank" rel="noopener noreferrer">browser</a> that you can download, where you use the TOR network. It also lets you access onion websites. Most of the criminal/dark web activities are happening here, since it is heavily private focussed. This is like a VPN but triple the privacy; it is also very slow.</p>
+                <p>There is a <a href="https://www.torproject.org/download/" target="_blank" rel="noopener noreferrer">browser</a> that you can download, where you use the TOR network. It also lets you access onion websites, which are basically websites hosted on these networks. Most of the criminal/dark web activities are happening here, since it is heavily private focussed. This is like a VPN but triple the privacy; it is also very slow.</p>
                 <p>Instead of 1 server, you go through 3 servers/nodes that are all in different countries. Every node has its own encryption for the next hop.</p>
                 
                 <h4>Circuit in a nutshell:</h4>
                 <ul class="sub-list">
-                    <li><strong>Entry / Guard node:</strong> Sees your IP. Knows you use TOR. Doesn’t see destination/content.</li>
-                    <li><strong>Middle relay:</strong> Sees IP from Guard and exit node. Doesn’t see your IP and destination/content.</li>
-                    <li><strong>Exit node:</strong> Sees destination. Also sees unencrypted data if the destination isn’t HTTPS. Doesn’t see your IP.</li>
+                    <li>
+                        <strong>Entry / Guard node:</strong> 
+                        <ul>
+                            <li>Sees: Your IP</li>
+                            <li>Knows: you use TOR</li>
+                            <li>Doesn’t see: Destination and content</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Middle relay:</strong> 
+                        <ul>
+                            <li>Sees: IP from Guard and exit node</li>
+                            <li>Doesn’t see: your IP and destination/content</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Exit node:</strong> 
+                        <ul>
+                            <li>Sees: destination (youtube.com, for example)</li>
+                            <li>Also sees: Unencrypted data if the destination isn’t HTTPS</li>
+                            <li>Doesn’t see: your IP (only the IP from the middle relay)</li>
+                        </ul>
+                    </li>
                 </ul>
+                <p>The website you visit thinks your IP is the one from the exit node.</p>
                 <p>Circuits also renew every 10 minutes.</p>
             </article>
 
@@ -603,6 +759,34 @@
             <p>Stay safe, stay secure.</p>
         </div>
     </footer>
+
+    <script>
+        // Auto-hide navigation on scroll down, show on scroll up
+        let lastScrollTop = 0;
+        const nav = document.getElementById('navbar');
+        const delta = 5; // Threshold to prevent small jiggles
+        const navbarHeight = nav.offsetHeight;
+
+        window.addEventListener('scroll', function() {
+            let st = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Make sure they scroll more than delta
+            if (Math.abs(lastScrollTop - st) <= delta)
+                return;
+
+            if (st > lastScrollTop && st > navbarHeight) {
+                // Scroll Down
+                nav.classList.add('nav-hidden');
+            } else {
+                // Scroll Up
+                if (st + window.innerHeight < document.body.scrollHeight) {
+                    nav.classList.remove('nav-hidden');
+                }
+            }
+            
+            lastScrollTop = st;
+        });
+    </script>
 
 </body>
 </html>
