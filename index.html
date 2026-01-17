@@ -285,8 +285,8 @@
 
                 <p>While it does contain a technical explanation, it is surely not the whole thing. There’s a lot more behind the scenes. I want to balance technical with simplification. I think you should know a bit of the background, as you can’t do something that you don’t know much about.</p>
                 
-                <h3>First of all, who am I?</h3>
-                <p>I have been a Computer and Internet enthusiast since the day I was born. I have a lot of passion for all sorts of tech, and I am eager to learn, which has led me to where I am now. If I give one sentence as a tip, it would be: <em>research, tinkering, patience, and repeat</em>. I could tell a lot more about myself in much more detail, but luckily, I have already done that. If you are genuinely interested in my experience, I have written a brief profile of myself on my portfolio. You can see it <a href="http://appel-man.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">here</a>.</p>
+                <h3>Who am I?</h3>
+                <p>I have been a Computer and Internet enthusiast since the day I was born. I have a lot of passion for all sorts of tech, and I am eager to learn, which has led me to where I am now. If I could give one sentence as a tip, it would be: <em>research, tinkering, patience, and repeat</em>. I could tell a lot more about myself in much more detail, but luckily, I have already partially done that. If you are genuinely interested in my experience, I have written a brief profile of myself on my portfolio. You can see it <a href="http://appel-man.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">here</a>.</p>
                 
                 <p>Anyways, enough about me, let’s explain some cybersecurity topics!</p>
             </div>
@@ -317,7 +317,7 @@
                         <br><br>
                         If they really want to, they could also DDOS you, more on that later.
                         <br><br>
-                        Another attack they can do is scanning for open ports (ports you forwarded, for example, for a website you host or a Minecraft server), and attack the service itself. So let’s say you have a computer hosting a Minecraft server, then they can attack it to take over that computer. That’s why it’s important to keep your computer and the stuff that’s running on it up to date. You shouldn’t port forward in the first place if you don’t have a security background. If you are unsure if you have open ports, check it in your router settings, or fill in your IP address in <a href="https://www.shodan.io/" target="_blank" rel="noopener noreferrer">Shodan</a>, but it isn’t up to date.
+                        Another attack they can do is scanning for open ports (ports you forwarded, for example, for a website you host or a Minecraft server), and attack the service itself. So let’s say you have a computer hosting a Minecraft server, then they can attack it to take over that computer. That’s why it’s important to keep your computer and the stuff that’s running on it up to date. You shouldn’t port forward in the first place if you don’t have a security background. If you are unsure if you have open ports, check it in your router settings, or fill in your IP address in <a href="https://www.shodan.io/" target="_blank" rel="noopener noreferrer">Shodan</a>, but it isn’t real-time.
                     </li>
                 </ul>
             </article>
@@ -356,7 +356,7 @@
 
                 <p>It is also a common misunderstanding that all traffic before your VPN was turned on will be forgotten. For example, when you sign up for an account without a VPN, that information will be logged and remembered, no matter how many times you use your VPN afterwards.</p>
 
-                <p><strong>Should you always use a VPN?</strong> Well, it depends on your scenario. Modern VPNs come with extra security features, but aren’t 100% needed. They market it like it is a must-have tool, but it isn’t so badly needed.</p>
+                <p><strong>Should you always use a VPN?</strong> Well, it depends on your scenario. Modern VPNs come with extra security features, but aren’t 100% needed. They market it like it is a must-have tool, which isn't true.</p>
                 
                 <p>When you should use it:</p>
                 <ul class="sub-list">
@@ -370,7 +370,7 @@
             <article class="topic" id="proxy">
                 <h3>Proxy</h3>
                 <p>A proxy is similar to a VPN, but without all the fancy stuff. It routes all traffic to a proxy server, thus changing your IP to the proxy server’s IP.</p>
-                <p>There are several types of proxies. But the one I advise you to use when visiting links you don’t trust is a webproxy.</p>
+                <p>There are several types of proxies. But the one I advise you to use when visiting links that potentially are IP grabbers is a webproxy.</p>
                 <p>A good webproxy that I use a lot is <a href="https://proxyium.com/" target="_blank" rel="noopener noreferrer">Proxyium</a>. You just paste the link in there, and it will all run on the proxy server. Keep in mind that they can still get all user-end/front-end/browser-side information. Only the IP changes. Thus, things like which browser you use, which OS you have. If they fetch your IP address on your browser side, then that doesn’t matter, because that request is always routed via the proxy.</p>
             </article>
 
@@ -464,7 +464,7 @@
                 </ul>
                 <p>A passkey is stored on your device, which also means that if it is stolen and unlocked, they have access to it. Thus, malware is also a thing. Attackers can also social engineer you if you are vulnerable to it. The way they are synchronised (iCloud, Google Password Manager) can be a target as well, thus not syncing them is a security feature.</p>
                 <p>A passkey combines something you have (your device) and something you are/know (biometric/PIN). It also only works with HTTPS.</p>
-                <p>Should you completely replace MFA and passwords with passkeys? I 100% do, but under one condition: If you don’t have access to the device you have the passkey on, your account will be lost; thus, store them on multiple devices, and you are good to go. Or you can just buy a YubiKey, which is a USB device that you store in your.</p>
+                <p>Do I advise you to replace MFA and passwords with passkeys? I 100% do, but under one condition: If you don’t have access to the device you have the passkey on, your account will be lost; thus, store them on multiple devices, and you are good to go. Or you can just buy a YubiKey, which is a USB device that you store in your key.</p>
             </article>
 
             <article class="topic" id="soceng">
@@ -478,7 +478,7 @@
                     <li>Impersonation</li>
                     <li>Tailgating / Piggybacking (Following someone into a restricted area, claiming to have forgotten a badge, carrying boxes to appear legitimate)</li>
                     <li>Scareware to disable your critical thinking (Fake virus alert, “Your account will be closed in 24 hours”, NFSW, hacked, someone trying to log in)</li>
-                    <li>Reverse Social Engineering (Attacker makes victim ask attacker for help)</li>
+                    <li>Reverse Social Engineering (Attacker makes victim ask the attacker for help)</li>
                     <li>BitB (Browser in the Browser, where they fake a new browser window that’s actually just in the browser; you can check this if you can’t move that window outside the browser)</li>
                     <li>And more</li>
                 </ul>
