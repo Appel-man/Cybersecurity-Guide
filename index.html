@@ -558,9 +558,9 @@
                 <p><strong>Scenario:</strong> You have a Discord concern or question, but aren’t familiar with the Discord blog, so you just ask in a server. Someone replied and said we should go in DMs, as otherwise the server gets annoyed with this question. He explained in short, but for more information, he says you should consult the official blog post and gives you the link to the official Discord blog post (an actual link, no phishing or fake domain), which goes to the official Discord blog forum with an admin talking about how to secure your account. And boom, your cookie has been stolen.</p>
                 <p><strong>But wait… How?</strong></p>
                 <ul class="sub-list">
-                    <li>Checked the domain on every corner</li>
-                    <li>Used a VPN</li>
-                    <li>Didn’t give any input except for visiting the exact, authentic official Discord website</li>
+                    <li>You checked the domain on every corner</li>
+                    <li>You used a VPN</li>
+                    <li>You didn’t give any input except for visiting the exact, authentic official Discord website</li>
                 </ul>
                 <p>This is because an attacker used XSS. Simply said, XSS is injecting your own script into the browser. Almost every website has JavaScript, a programming language, to make a website function. Like when you press the login button, you get brought to the normal page and are logged in to your account. But if the website is not secure enough, an attacker could inject their own script into the browser.</p>
                 <p>Okay, so how did it happen in the scenario: An attacker commented on the official blog post with a normal message like “Thank you, I almost got my password reset” along with the XSS script. And now, every time you visit that page, the page will load all its contents, including the comments and thus also the script that was injected, and run it.</p>
@@ -668,7 +668,9 @@
                     <li>Detecting a bunch of unusual/malwareish events.</li>
                     <li>Uploading the file to <a href="https://www.virustotal.com/gui/home/upload" target="_blank" rel="noopener noreferrer">VirusTotal</a>.</li>
                 </ul>
+            </article>
 
+            <article class="topic" id="databreaches">
                 <h3>Data Breaches</h3>
                 <p>A data breach is when a database is compromised. This can be because of various reasons, a common one is <a href="http://en.wikipedia.org/wiki/SQL_injection" target="_blank" rel="noopener noreferrer">SQL Injection</a>.</p>
                 <p>Every piece of information you give to a company, via websites or whatever, is stored in a database. Thus, your email, name, billings, and maybe a picture of your face or passport, because you verified your age, your IP address and so on.</p>
